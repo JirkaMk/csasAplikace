@@ -10,7 +10,7 @@ public class PageController {
 	@RequestMapping(value = { "", "/home", "/index" }) //vsechno s timhle URL pujde pres tuhle metodu
 	public ModelAndView index() {
 
-		ModelAndView mv = new ModelAndView("page");
+		ModelAndView mv = new ModelAndView("page"); // dispatcher-servlet preklada na page.jsp
         mv.addObject("greeting", "Welcome to Spring Web MVC");
 		return mv;
 	}
