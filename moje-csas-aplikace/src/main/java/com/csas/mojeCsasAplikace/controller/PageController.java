@@ -13,10 +13,32 @@ public class PageController {
 	public ModelAndView index() {
 		
 		ModelAndView mv = new ModelAndView("page"); // dispatcher-servlet preklada na page.jsp
-		mv.addObject("greeting", "Welcome to Spring Web MVC");
+		//mv.addObject("greeting", "Welcome to Spring Web MVC");
+		mv.addObject("title", "Home"); // incializuje promennou title hodnotou Home
+		mv.addObject("userClickHome", true); // incializuje prommennou userClickHome hodnotou true
 		return mv;
 	}
 
+	@RequestMapping(value = "/about") // vsechno s timhle URL pujde pres tuhle metodu
+	public ModelAndView about() {
+		
+		ModelAndView mv = new ModelAndView("page"); // dispatcher-servlet preklada na page.jsp
+		//mv.addObject("greeting", "Welcome to Spring Web MVC");
+		mv.addObject("title", "About Us"); // incializuje promennou title hodnotou Home
+		mv.addObject("userClickAbout", true); // incializuje prommennou userClickHome hodnotou true
+		return mv;
+	}
+	
+	@RequestMapping(value = "/contact") // vsechno s timhle URL pujde pres tuhle metodu
+	public ModelAndView contact() {
+		
+		ModelAndView mv = new ModelAndView("page"); // dispatcher-servlet preklada na page.jsp
+		//mv.addObject("greeting", "Welcome to Spring Web MVC");
+		mv.addObject("title", "Contact Us"); // incializuje promennou title hodnotou Home
+		mv.addObject("userClickContact", true); // incializuje prommennou userClickHome hodnotou true
+		return mv;
+	}
+	
 /*	@RequestMapping(value = "/test2")
 	// RequesParam prisuzuje URL parameter, ktery je diky required false promenne nepovinny
 	public ModelAndView test2(@RequestParam(value = "greeting", required = false) String greeting) {
