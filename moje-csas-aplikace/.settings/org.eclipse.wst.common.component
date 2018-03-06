@@ -4,6 +4,9 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <dependent-module archiveName="moje-csas-aplikace-backend-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/moje-csas-aplikace-backend/moje-csas-aplikace-backend">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="moje-csas-aplikace"/>
         <property name="java-output-path" value="/moje-csas-aplikace/target/classes"/>
     </wb-module>

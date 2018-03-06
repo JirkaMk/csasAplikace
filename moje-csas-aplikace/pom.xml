@@ -16,6 +16,12 @@
 	</properties>
 
 	<dependencies>
+		<!-- Pripojeni BE casti aplikace -->
+		<dependency>
+			<groupId>com.csas</groupId>
+			<artifactId>moje-csas-aplikace-backend</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<!-- JAVA EE API -->
 		<dependency>
 			<groupId>javax</groupId>
@@ -41,7 +47,7 @@
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
-		</dependency>		
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>moje-csas-aplikace</finalName>
