@@ -9,8 +9,16 @@ $(function() {
 		case 'Contact Us':
 			$('#contact').addClass('active');
 			break;
+		case 'All Products':
+			$('#listProducts').addClass('active');
+			break;				
+		case 'CSAS ATM':
+			$('#csasATMs').addClass('active');
+			break;			
 		default:
-			$('#home').addClass('active');
+			//$('#listProducts').addClass('active');
+		    $('#a_'+menu).addClass('active'); // menu, coz je category.getName() predavam jako objekt v pagecontroleru tride ModelandView 
+		break;
 	}
 		
 	

@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 
 <spring:url var="css" value="/resources/css" />
 <!-- mapuje se na dispatcher servlet, ktery odkazuje na zdroje s css -->
@@ -82,6 +82,14 @@
 	<c:if test="${userClickContact == true}">
 		<%@include file="contact.jsp"%>
 	</c:if>
+	
+	<c:if test="${userClickAllProducts == true or userClickCategoryProducts == true}">
+		<%@include file="listProducts.jsp"%>
+	</c:if>
+	
+	<c:if test="${userClickCsasATMs == true}">
+		<%@include file="csasATMs.jsp"%>
+	</c:if>	
     
     </div>
     

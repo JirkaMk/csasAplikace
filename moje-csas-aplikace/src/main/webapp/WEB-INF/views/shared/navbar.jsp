@@ -9,7 +9,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-		    <a class="navbar-brand" href="${contextRoot}/home">Moje CSAS aplikace</a>
+		    <a class="navbar-brand" href="${contextRoot}/home">CSAS app for learning</a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
@@ -20,9 +20,9 @@
 					<!-- id="about" zadavam, abych mohl v listu tlacitek vybirat konkretni... -->
 					<a href="${contextRoot}/about">About</a>
 				</li>
-				<li id="listProducts"><a href="${contextRoot}/listProducts">View
-						Products</a></li>
+				<li id="listProducts"><a href="${contextRoot}/show/all/products">View Products</a></li>
 				<li id="contact"><a href="${contextRoot}/contact">Contact</a></li>
+				<li id="csasATMs"><a href="${contextRoot}/atm">CSAS ATM</a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->

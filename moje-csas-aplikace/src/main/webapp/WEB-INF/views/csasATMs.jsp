@@ -3,9 +3,9 @@
 
 	<div class="row">	
 		
-		<h1>About Us</h1>
+		<h1>CSAS ATM Overview</h1>
 		<hr/>
-		<p>This is an about us page</p>	
+		<p>TO DO</p>	
 	
 	</div>
 
