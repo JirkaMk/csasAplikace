@@ -37,9 +37,12 @@
 
 <title>Moje zkusebni aplikace - ${title}</title>
 
-<!-- jednoduchy script slouzici ke zvyrazneni aktivni polozky -->
+
 <script>
+    <!-- jednoduchy script slouzici ke zvyrazneni aktivni polozky -->
 	window.menu = '${title}'; //konfiguraci menu provadim v myapp.js
+	
+	window.contextRoot = '${contextRoot}'; // doucit - predava pravdepodobne Java Scriptu pristup kecontextRoot
 </script>
 
 <!-- Bootstrap Core CSS -->
@@ -50,6 +53,9 @@
 
 <!-- Bootstrap Readable Theme -->
 <link href="${css}/bootstrap-custom-theme.css" rel="stylesheet">
+
+<!-- Bootstrap DataTables Theme -->
+<link href="${css}/dataTables.bootstrap.css" rel="stylesheet">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -103,6 +109,12 @@
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="${js}/bootstrap.min.js"></script>
+
+	<!-- Data table plugin -->
+	<script src="${js}/jquery.dataTables.js"></script>
+
+	<!-- DataTable Boostrap Script -->
+	<script src="${js}/dataTables.bootstrap.js"></script>	                   			
 	
 	<!-- Vlastni javascript mimo sablonu -->
     <script src="${js}/myapp.js"></script>
