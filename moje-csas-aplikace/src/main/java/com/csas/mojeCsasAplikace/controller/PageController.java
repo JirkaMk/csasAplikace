@@ -14,7 +14,7 @@ public class PageController {
 
     // Spring se postara uz o instanci tehle kategorie sam, nic nevytvarim	
 	@Autowired
-	private CategoryDao categoryDAO;
+	private CategoryDao categoryDao;
 	
 	@RequestMapping(value = { "", "/home", "/index" }) // vsechno s timhle URL pujde pres tuhle metodu
 	public ModelAndView index() {
@@ -23,7 +23,7 @@ public class PageController {
 		//mv.addObject("greeting", "Welcome to Spring Web MVC");
 		mv.addObject("title", "Home"); // incializuje (preda) promennou title hodnotou Home
 		
-		mv.addObject("categories", categoryDAO.list()); // predavam list kategorii z tridy(rozhrani) categoryDAO MVC Springu
+		mv.addObject("categories", categoryDao.list()); // predavam list kategorii z tridy(rozhrani) categoryDao MVC Springu
 		
 		mv.addObject("userClickHome", true); // incializuje prommennou (preda) userClickHome hodnotou true
 		
@@ -58,7 +58,7 @@ public class PageController {
 		//mv.addObject("greeting", "Welcome to Spring Web MVC");
 		mv.addObject("title", "All Products"); // incializuje (preda) promennou title hodnotou Home
 		
-		mv.addObject("categories", categoryDAO.list()); // predavam list kategorii z tridy(rozhrani) categoryDAO MVC Springu
+		mv.addObject("categories", categoryDao.list()); // predavam list kategorii z tridy(rozhrani) categoryDao MVC Springu
 		
 		mv.addObject("userClickAllProducts", true); // incializuje prommennou (preda) userClickHome hodnotou true
 		
@@ -69,15 +69,15 @@ public class PageController {
 	public ModelAndView showCategoryProducts(@PathVariable("id")int id) { //je potreba mit pristup k ID kategorie proto anotace @PathVariable
 		ModelAndView mv = new ModelAndView("page"); // dispatcher-servlet preklada na page.jsp
 
-		// abych nacetl pouze konkretni kategorii, pouziju BE implementaci categoryDAO
+		// abych nacetl pouze konkretni kategorii, pouziju BE implementaci categoryDao
 		Category category = null;
 		
-		category = categoryDAO.get(id);
+		category = categoryDao.get(id);
 		
 		//mv.addObject("greeting", "Welcome to Spring Web MVC");
 		mv.addObject("title", category.getName()); // incializuje (preda) promennou title hodnotou Home
 		
-		mv.addObject("categories", categoryDAO.list()); // predavam list kategorii z tridy(rozhrani) categoryDAO MVC Springu
+		mv.addObject("categories", categoryDao.list()); // predavam list kategorii z tridy(rozhrani) categoryDao MVC Springu
 
 		mv.addObject("category", category); //predavam jeden objekt kategorii rovnajici se ID z requestu 
 		

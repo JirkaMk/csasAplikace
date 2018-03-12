@@ -13,16 +13,20 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@Configuration
-@ComponentScan(basePackages={"net.kzn.shoppingbackend.dto"})
+// rikame springu ze jde o urcitou konfiguraci, bean ktery ma spravuje spring
+@Configuration 
+// kde jsou umisteny tridy ke kterym se vaze tahle konfigurace 
+@ComponentScan(basePackages={"com.csas.moje_csas_aplikace_backend.dto"})
+// managment transakci, stara se o tvorbu a ukonceni spojeni s databazi (posila napriklad query na DB)
+// dale sleduje entity,jejich zmeny apod
 @EnableTransactionManagement
 public class HibernateConfig {
 
 	// Change the below based on the DBMS you choose
-	private final static String DATABASE_URL = "jdbc:h2:tcp://localhost/~/onlineshopping";
+	private final static String DATABASE_URL = "jdbc:h2:tcp://localhost/~/mojeCsasAplikace";
 	private final static String DATABASE_DRIVER = "org.h2.Driver";
 	private final static String DATABASE_DIALECT = "org.hibernate.dialect.H2Dialect";
-	private final static String DATABASE_USERNAME = "sa";
+	private final static String DATABASE_USERNAME = "admin";
 	private final static String DATABASE_PASSWORD = "";
 	
 	// dataSource bean will be available
@@ -47,10 +51,11 @@ public class HibernateConfig {
 	@Bean
 	public SessionFactory getSessionFactory(DataSource dataSource) {
 		
+		// na beanu dataSource vytvori session 
 		LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource);
 		
 		builder.addProperties(getHibernateProperties());
-		builder.scanPackages("net.kzn.shoppingbackend.dto");
+		builder.scanPackages("com.csas.moje_csas_aplikace_backend.dto"); // specifikuji lokaci entit
 		
 		return builder.buildSessionFactory();
 		
@@ -64,7 +69,8 @@ public class HibernateConfig {
 		Properties properties = new Properties();
 		
 		
-		properties.put("hibernate.dialect", DATABASE_DIALECT);		
+		//moje nastaveni hibernate 
+		properties.put("hibernate.dialect", DATABASE_DIALECT); // rikam Springu ze pouzivam dialekt hibernate		
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.format_sql", "true");
 		
@@ -72,7 +78,7 @@ public class HibernateConfig {
 		return properties;
 	}
 	
-	// transactionManager bean
+	// transactionManager bean - transakce
 	@Bean
 	public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
 		HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);

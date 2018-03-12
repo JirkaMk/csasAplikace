@@ -14,8 +14,8 @@
 
 	<!-- díky tomuhle ví aplikace kde jsou kontrolery a co ma skenovat -->
 	<context:component-scan base-package="com.csas.mojeCsasAplikace.controller"></context:component-scan>
-	<!-- rikam dispatcherovi at skenuje v BE tridu daoimpl s kategoriemi -->
-	<context:component-scan base-package="com.csas.moje_csas_aplikace_backend.daoimpl"></context:component-scan>
+	<!-- rikam dispatcherovi at skenuje v BE vsechny potrebne beany -->
+	<context:component-scan base-package="com.csas.moje_csas_aplikace_backend"></context:component-scan>
 
 	<!-- rika Springu, ze ma vzit v potaz nize uveden soubory na zaklade Springove 
 		tridy InternalResourceViewResolver -->
