@@ -62,6 +62,7 @@ $(function() {
 			},
 			columns: [
 			          {
+			        	  //pridavam obrazky
 			        	  data: 'code',
 			        	  bSortable: false,
 			        	  mRender: function(data, type, row) {
