@@ -1,8 +1,18 @@
 
 package com.csas.moje_csas_aplikace_backend.dto;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,17 +29,37 @@ import org.apache.commons.lang.builder.ToStringBuilder;
     "outageType",
     "publicNoteCs"
 })
-public class Outage {
 
+@Entity
+public class Outage implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
+	private int id; 
+    
     @JsonProperty("outageDate")
     private String outageDate;
     @JsonProperty("outageType")
     private String outageType;
     @JsonProperty("publicNoteCs")
     private String publicNoteCs;
+
+    @Transient
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
+    @ManyToOne
+    private Item item;
+
+    public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
+    
     @JsonProperty("outageDate")
     public String getOutageDate() {
         return outageDate;

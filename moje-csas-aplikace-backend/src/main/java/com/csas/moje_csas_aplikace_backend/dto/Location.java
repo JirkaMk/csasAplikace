@@ -1,8 +1,17 @@
 
 package com.csas.moje_csas_aplikace_backend.dto;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,14 +27,33 @@ import org.apache.commons.lang.builder.ToStringBuilder;
     "lat",
     "lng"
 })
+
+@Entity
 public class Location {
 
-    @JsonProperty("lat")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
+	private int id; 
+	@JsonProperty("lat")
     private Double lat;
     @JsonProperty("lng")
     private Double lng;
-    @JsonIgnore
+
+    @JsonIgnore 
+    @Transient
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+   @OneToOne
+    private Item item;
+
+    public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
 
     @JsonProperty("lat")
     public Double getLat() {

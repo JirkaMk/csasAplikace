@@ -1,5 +1,7 @@
 package com.csas.moje_csas_aplikace_backend.dto;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,7 @@ import javax.persistence.Id;
 //trida predstavujici objektove zastoupeni tlacitka kategorie v levem menu
 
 @Entity 
-public class Category {
+public class Category{
 
 	@Id // rikam Springu ze tohle je primarni ID
 	@GeneratedValue (strategy = GenerationType.IDENTITY) // rikam tim ze id je tvoreno automaticky
@@ -67,4 +69,3 @@ public class Category {
 	
 	
 }
-

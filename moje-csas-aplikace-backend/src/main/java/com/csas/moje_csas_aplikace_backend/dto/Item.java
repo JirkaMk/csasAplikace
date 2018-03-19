@@ -1,9 +1,21 @@
 
 package com.csas.moje_csas_aplikace_backend.dto;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,11 +50,16 @@ import org.apache.commons.lang.builder.ToStringBuilder;
     "manager",
     "outages"
 })
-public class Item {
 
-    @JsonProperty("id")
+@Entity
+public class Item implements Serializable{
+
+	@Id
+	@JsonProperty("id")
     private Long id;
-    @JsonProperty("location")
+    
+	@OneToOne
+	@JsonProperty("location")   
     private Location location;
     @JsonProperty("type")
     private String type;
@@ -60,12 +77,17 @@ public class Item {
     private String country;
     @JsonProperty("region")
     private String region;
+    
+    @OneToOne
     @JsonProperty("cashWithdrawal")
     private CashWithdrawal cashWithdrawal;
     @JsonProperty("district")
     private String district;
     @JsonProperty("email")
     private String email;
+    
+	@ElementCollection
+	@CollectionTable(name="phones", joinColumns=@JoinColumn(name="id"))
     @JsonProperty("phones")
     private List<String> phones = null;
     @JsonProperty("moreBuildings")
@@ -76,12 +98,22 @@ public class Item {
     private String courierCode;
     @JsonProperty("branchNum")
     private String branchNum;
+    
+	@ElementCollection
+	@CollectionTable(name="equipmentTable", joinColumns=@JoinColumn(name="id"))
     @JsonProperty("equipment")
     private List<Equipment> equipment = null;
+    
+    @OneToOne
     @JsonProperty("manager")
     private Manager manager;
+    
+	@ElementCollection
+	@CollectionTable(name="outagesTable", joinColumns=@JoinColumn(name="id"))    
     @JsonProperty("outages")
     private List<Outage> outages = null;
+    
+    @Transient
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 

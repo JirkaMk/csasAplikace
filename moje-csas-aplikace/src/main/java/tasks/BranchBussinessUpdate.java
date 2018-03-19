@@ -1,55 +1,57 @@
-package com.csas.mojeCsasAplikace.controller;
+package tasks;
 
+import java.sql.Connection;
 import java.util.Arrays;
-import java.util.List;
 
-import org.dom4j.Branch;
+import javax.sql.DataSource;
+
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.csas.moje_csas_aplikace_backend.dao.ProductDao;
+import com.csas.moje_csas_aplikace_backend.daoimpl.AtmDaoImpl;
 import com.csas.moje_csas_aplikace_backend.dto.ATM;
-import com.csas.moje_csas_aplikace_backend.dto.Product;
 
-@Controller
-@RequestMapping("/json/data") //vsechny mapovani ktera zacinaji takto 
-public class JsonDataController {
 
-	@Autowired
-	private ProductDao productDao;
+
+public class BranchBussinessUpdate {
+ 
+/*	@Autowired
+	private AtmDaoImpl atmDaoImpl;*/
 	
-	
-	@RequestMapping("/all/products")
-	@ResponseBody // vrat telo, Spring a Jakson - converter uz se postara ze dojde k vraceni ve forme JSON
-	public List<Product> getAllProducts() {
-		
-		return productDao.listActiveProducts();
-				
-	}
-	
-	@RequestMapping("/category/{id}/products")
-	@ResponseBody
-	public List<Product> getProductsByCategory(@PathVariable int id) {
-		
-		return productDao.listActiveProductsByCategory(id);
-				
-	}
-	
-	
-	/* -------------- CSAS cast -------------- */
-	
-	@RequestMapping("/all/atms")
-	@ResponseBody
-    public ATM saysHi() {
+    @Scheduled(fixedRate=5000)  
+	public void printMessage() {
+        System.out.println("I am called by Spring scheduler");
+        
+        ATM aTM = new ATM();
+        
+        aTM = updateATM();
+        
+        //atmDaoImpl.add(aTM);
+        
+        //sessionFactory.getCurrentSession().save(aTM.getItems());
+        
+
+        
+        
+        
+    }
+    
+    public ATM updateATM() {
 		
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(new MediaType[] { MediaType.APPLICATION_JSON}));
@@ -76,6 +78,5 @@ public class JsonDataController {
         //List<Object> objects2 = new ArrayList<Object>();
         System.out.println(responseEntity.getBody().toString());
         return responseEntity.getBody();
-    }	
-
+    }	    
 }

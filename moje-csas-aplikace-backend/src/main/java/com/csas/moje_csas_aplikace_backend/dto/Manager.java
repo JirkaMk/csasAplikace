@@ -1,9 +1,23 @@
 
 package com.csas.moje_csas_aplikace_backend.dto;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+import javax.persistence.JoinColumn;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,23 +28,48 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "name",
     "phones",
     "email"
 })
-public class Manager {
 
-    @JsonProperty("name")
+@Entity
+public class Manager implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
+	private int id; 
+    
+	@JsonProperty("name")
     private String name;
-    @JsonProperty("phones")
-    private List<String> phones = null;
+    
+	@ElementCollection
+	@CollectionTable(name="phones2", joinColumns=@JoinColumn(name="id"))
+	@JsonProperty("phones")
+	private List<String> phones = null;
     @JsonProperty("email")
     private String email;
+
+    @Transient
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
+   @OneToOne
+    private Item item;
+
+    public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
+    
     @JsonProperty("name")
     public String getName() {
         return name;

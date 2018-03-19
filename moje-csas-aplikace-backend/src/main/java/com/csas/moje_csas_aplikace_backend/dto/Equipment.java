@@ -1,8 +1,17 @@
 
 package com.csas.moje_csas_aplikace_backend.dto;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,18 +28,37 @@ import org.apache.commons.lang.builder.ToStringBuilder;
     "name",
     "count"
 })
-public class Equipment {
 
-    @JsonProperty("id")
+@Entity
+public class Equipment implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore    
+	private int idX;
+	@JsonProperty("id")
     private Long id;
     @JsonProperty("name")
     private String name;
     @JsonProperty("count")
     private Long count;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("id")
+    @Transient
+    @JsonIgnore   
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    
+    @ManyToOne
+    private Item item;
+
+    public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
+
+	@JsonProperty("id")
     public Long getId() {
         return id;
     }
